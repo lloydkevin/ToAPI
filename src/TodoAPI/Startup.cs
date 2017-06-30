@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using TodoAPI.Data;
 
 namespace TodoAPI
 {
@@ -27,6 +29,7 @@ namespace TodoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TodoDataContext>(x => x.UseInMemoryDatabase());
             // Add framework services.
             services.AddMvc();
         }
