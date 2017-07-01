@@ -32,6 +32,8 @@ namespace TodoAPI
             services.AddDbContext<TodoDataContext>(x => x.UseInMemoryDatabase());
             // Add framework services.
             services.AddMvc();
+
+            services.AddScoped<ITodoRepository, TodoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
