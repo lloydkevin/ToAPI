@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using TodoAPI.Data;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace TodoAPI
 {
@@ -33,6 +34,12 @@ namespace TodoAPI
             // Add framework services.
             services.AddMvc();
 
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.EnableForHttps = true;
+            });
+
             services.AddScoped<ITodoRepository, TodoRepository>();
         }
 
@@ -42,6 +49,7 @@ namespace TodoAPI
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseResponseCompression();
             app.UseMvc();
         }
     }
