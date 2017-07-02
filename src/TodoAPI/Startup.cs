@@ -46,8 +46,21 @@ namespace TodoAPI
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            SetupAuth(app);
+
             app.UseResponseCompression();
             app.UseMvc();
+        }
+
+        private void SetupAuth(IApplicationBuilder app)
+        {
+            var options = new JwtBearerOptions
+            {
+                Audience = Configuration["Auth0:ApiIdentifier"],
+                Authority = $"https://{Configuration["Auth0:Domain"]}/"
+            };
+
+            app.UseJwtBearerAuthentication(options);
         }
     }
 }
