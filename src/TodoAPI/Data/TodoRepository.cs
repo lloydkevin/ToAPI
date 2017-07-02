@@ -28,12 +28,12 @@ namespace TodoAPI.Data
 
         public TodoItem Get(long id)
         {
-            return _dataContext.ToTodoItem.AsNoTracking().FirstOrDefault(x => x.Id == id);
+            return _dataContext.TodoItem.AsNoTracking().FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<TodoItem> GetAll()
         {
-            return _dataContext.ToTodoItem.AsNoTracking().ToList();
+            return _dataContext.TodoItem.AsNoTracking().ToList();
         }
 
         public TodoItem Update(TodoItem item)

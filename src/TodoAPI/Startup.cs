@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +26,8 @@ namespace TodoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoDataContext>(x => x.UseInMemoryDatabase());
+            string connection  = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TodoDataContext>(options => options.UseNpgsql(connection));
             // Add framework services.
             services.AddMvc();
 
