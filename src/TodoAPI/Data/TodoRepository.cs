@@ -20,6 +20,12 @@ namespace TodoAPI.Data
             _dataContext.SaveChanges();
         }
 
+        public void Delete(TodoItem item)
+        {
+            _dataContext.Remove(item);
+            _dataContext.SaveChanges();
+        }
+
         public TodoItem Get(long id)
         {
             return _dataContext.ToTodoItem.AsNoTracking().FirstOrDefault(x => x.Id == id);

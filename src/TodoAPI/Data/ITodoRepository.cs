@@ -9,5 +9,6 @@ namespace TodoAPI.Data
         void Add(TodoItem todoItem);
         TodoItem Get(long id);
         TodoItem Update(TodoItem item);
+        void Delete(TodoItem item);
     }
 }

@@ -53,5 +53,18 @@ namespace TodoAPI.Controllers
             var result = _repository.Update(item);
             return new NoContentResult();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var item = _repository.Get(id);
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            _repository.Delete(item);
+            return new NoContentResult();
+        }
     }
 }
