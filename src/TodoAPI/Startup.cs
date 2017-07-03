@@ -27,7 +27,10 @@ namespace TodoAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string connection  = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<TodoDataContext>(options => options.UseNpgsql(connection));
+            // services.AddDbContext<TodoDataContext>(options => options.UseNpgsql(connection));
+
+            services.AddDbContext<TodoDataContext>(options => options.UseSqlite("Data Source=Database.db"));
+
             // Add framework services.
             services.AddMvc();
 
